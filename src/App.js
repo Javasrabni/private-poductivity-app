@@ -1,24 +1,26 @@
-import logo from './logo.svg';
 import './App.css';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+
+// Web Component
+import Main from './main';
+import AuthWrapper from './Components/Auth/AuthWrapper';
+import LoginPage from './Components/Auth/Auth Page/LoginPage';
+import Dashboard from './Components/Dashboard/Dashboard';
+import GetUserDPProvider from './Context/UserProfileData/getUserProfileData';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <GetUserDPProvider>
+        <Routes>
+          <Route index path='/' element={<Main />} />
+          <Route index path='/login' element={<LoginPage />} />
+
+          {/* PROTECTED PATH */}
+          <Route index path='/dashboard' element={<AuthWrapper><Dashboard /></AuthWrapper>} />
+        </Routes>
+      </GetUserDPProvider>
+    </BrowserRouter>
   );
 }
 
