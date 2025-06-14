@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { data, useNavigate } from "react-router-dom";
 import { CheckAuth } from "../../Services/AuthCheck";
 
 const AuthWrapper = ({ children }) => {
@@ -26,7 +26,7 @@ const AuthWrapper = ({ children }) => {
 
         };
         verifyAuth();
-    }, [navigate]);
+    }, []);
 
     // Jangan render apapun saat masih loading
     if (auth.loading) {
