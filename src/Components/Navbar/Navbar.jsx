@@ -73,8 +73,10 @@ const Navbar = () => {
 
     // Filtering user data
     const [suggestion, setSuggestion] = useState([])
+    const [searchUservalue, setSearchUserValue] = useState(null)
     const HandleSearchUser = (value) => {
         const inputValue = value.target.value
+        setSearchUserValue(inputValue)
         const filteringData = GetAllUserData.filter(item =>
             item.username.toLowerCase().includes(inputValue)
         )
@@ -91,7 +93,7 @@ const Navbar = () => {
                 <div style={{ ...InputNprofileContainer }}>
                     {/* Search user */}
                     <div>
-                        <input type="text" style={{ ...SearchInputStyle }} placeholder='Search people in olintser' onChange={(e) => HandleSearchUser(e)} />
+                        <input type="text" style={{ ...SearchInputStyle }} placeholder='Search people in olintser' value={searchUservalue} onChange={(e) => HandleSearchUser(e)} onBlur={() => { setSearchUserValue(''); setSuggestion([]);  }} />
                     </div>
                     {/* Profile */}
                     <span style={{ width: '32px', height: '32px', borderRadius: '20px', backgroundColor: 'var(--blue-accent)', flexShrink: 0 }}>
