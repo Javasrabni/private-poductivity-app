@@ -9,10 +9,13 @@
 
 :root {
   --baseColor: #fff;
+  --second-baseColor: #F7F7F7FF;
+  
   --baseColorBlack: #000;
   --blue-accent: #636AE8FF;
 
   --second-base-font-color: #8C8D8BFF;
+
 
   --border:  #EBEBEAFF;
 }
