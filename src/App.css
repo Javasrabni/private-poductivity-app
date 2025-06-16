@@ -10,7 +10,7 @@
 :root {
   --baseColor: #fff;
   --second-baseColor: #F7F7F7FF;
-  
+
   --baseColorBlack: #000;
   --blue-accent: #636AE8FF;
 
@@ -18,4 +18,8 @@
 
 
   --border:  #EBEBEAFF;
+}
+
+body {
+  overflow-x: hidden;
 }
