@@ -113,13 +113,13 @@ const Dashboard = () => {
             {/* <p>{user_status ? 'atif' : 'offline'}</p>
             <p>{username} sedang {userStatus.user_status ? 'aktif' : 'offline'}</p> */}
 
-            {GetAllUserData.map((item, idx) => (
+            {/* {GetAllUserData.map((item, idx) => (
               <div key={idx}>
                 <p>{item.username}</p>
                 <p>{item.email}</p>
                 <p>{userStatus ? 'aktif' : 'offline'}</p>
               </div>
-            ))}
+            ))} */}
           </div>
         </div>
       </div>

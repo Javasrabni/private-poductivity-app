@@ -82,7 +82,8 @@ const Navbar = () => {
         transition: 'transform 0.3s ease',
         width: '384px',
         height: '100vh',
-        backgroundColor: 'var(--second-baseColor)',
+        // backgroundColor: 'var(--second-baseColor)',
+        backgroundColor: '#fff',
     }
 
     const NotifIcon = <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 28 28" strokeWidth={1} stroke="var(--second-base-font-color)" className="size-6">
@@ -147,7 +148,7 @@ const Navbar = () => {
                             <div style={{ width: '24px' }}>{NotifIcon}</div>
                         </div>
 
-                        <input type="text" style={{ ...SearchInputStyle }} placeholder='Search people in olintser' value={searchUservalue} onChange={(e) => HandleSearchUser(e)} onBlur={() => { setSearchUserValue(''); setTimeout(() => { setSuggestion([]) }, 100); setOnClickProfile(true) }} />
+                        <input type="text" style={{ ...SearchInputStyle }} placeholder='Search people in olintser' value={searchUservalue} onChange={(e) => HandleSearchUser(e)} onBlur={() => { setSearchUserValue(''); setTimeout(() => { setSuggestion([]) }, 100); }} />
                     </div>
                     {/* Profile */}
                     <div tabIndex={0} style={{ width: '32px', height: '32px', borderRadius: '20px', backgroundColor: 'var(--blue-accent)', flexShrink: 0, cursor: 'pointer' }} onClick={() => setOnClickProfile(true)} onFocus={() => setOnClickProfile(true)} onBlur={() => setOnClickProfile(false)}>
