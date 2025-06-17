@@ -23,7 +23,7 @@ const GetUserDPProvider = ({ children }) => {
     }, [])
     
     return (
-        <UserDPContext.Provider value={userDataProfile }>
+        <UserDPContext.Provider value={userDataProfile}>
             {children}
         </UserDPContext.Provider>
     )

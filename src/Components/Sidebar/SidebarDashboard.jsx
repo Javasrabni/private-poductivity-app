@@ -1,11 +1,16 @@
 import React, { useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
+import { useGetUserConnections } from '../../Context/GetUserConnections/GetUserConnectionsContext'
 // import { ReactComponent as HomeIcon } from '../../Assets/Icons/home.svg'
 
 const SidebarDashboard = () => {
     const navigate = useNavigate()
     const location = useLocation()
     const activeButton = location.pathname
+
+    // Get user data
+    const userConnections = useGetUserConnections()
+    const mapUserConnection = userConnections.userConnections
 
     // Button style
     const SidebarStyle = {
@@ -74,6 +79,15 @@ const SidebarDashboard = () => {
                         </span>
                     </button>
                 ))}
+
+                <div>
+                    <p>My Connections</p>
+                    {mapUserConnection.length > 1 && mapUserConnection.map((item, idx) => (
+                        <div key={idx}>
+                            <p >{item.connected_username}</p>
+                        </div>
+                    ))}
+                </div>
             </div>
         </div>
     )

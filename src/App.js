@@ -10,26 +10,29 @@ import NotFoundPage from './Components/NotFoundPage/NotFoundPage';
 // Context
 import GetUserDPProvider from './Context/UserProfileData/getUserProfileData';
 import GetAllUserDataProvider from './Context/GetAllUserData/getAllUserData';
+import GetUserConnectionsProvider from './Context/GetUserConnections/GetUserConnectionsContext';
 
 function App() {
   return (
     <BrowserRouter>
       <GetUserDPProvider>
-        <GetAllUserDataProvider>
-          <Routes>
-            <Route index path='/' element={<Main />} />
-            <Route path='/login' element={<LoginPage />} />
-            <Route path='*' element={<NotFoundPage />} />
+        <GetUserConnectionsProvider>
+          <GetAllUserDataProvider>
+            <Routes>
+              <Route index path='/' element={<Main />} />
+              <Route path='/login' element={<LoginPage />} />
+              <Route path='*' element={<NotFoundPage />} />
 
 
-            {/* PROTECTED PATH */}
-            <Route path='/dashboard' element={<AuthWrapper><Dashboard /></AuthWrapper>} />
-            <Route path='/calendar' element={<AuthWrapper><Dashboard /></AuthWrapper>} />
-            <Route path='/teams' element={<AuthWrapper><Dashboard /></AuthWrapper>} />
-            <Route path='/analytics' element={<AuthWrapper><Dashboard /></AuthWrapper>} />
-            <Route path='/messages' element={<AuthWrapper><Dashboard /></AuthWrapper>} />
-          </Routes>
-        </GetAllUserDataProvider>
+              {/* PROTECTED PATH */}
+              <Route path='/dashboard' element={<AuthWrapper><Dashboard /></AuthWrapper>} />
+              <Route path='/calendar' element={<AuthWrapper><Dashboard /></AuthWrapper>} />
+              <Route path='/teams' element={<AuthWrapper><Dashboard /></AuthWrapper>} />
+              <Route path='/analytics' element={<AuthWrapper><Dashboard /></AuthWrapper>} />
+              <Route path='/messages' element={<AuthWrapper><Dashboard /></AuthWrapper>} />
+            </Routes>
+          </GetAllUserDataProvider>
+        </GetUserConnectionsProvider>
       </GetUserDPProvider>
     </BrowserRouter >
   );
