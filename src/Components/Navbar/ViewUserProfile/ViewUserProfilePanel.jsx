@@ -79,7 +79,7 @@ const ViewUserProfilePanel = ({ userId, username, email, photoProfile }) => {
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column' }}>
                 {/* Photo profile */}
                 <div style={{ ...photoProfileContainer }}>
-                    {/* <img style={{ width: '100%' }} src={photoProfile} alt={`${username} Photo profile`} /> */}
+                    <img style={{ width: '100%', borderRadius: '100%' }} draggable={false} src={photoProfile} alt={`${username} Photo profile`} />
                 </div>
                 <h1 style={{ ...usernameStyle }}>{username}</h1>
                 <p style={{ ...emailStyle }}>{email}</p>

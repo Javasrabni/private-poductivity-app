@@ -110,7 +110,9 @@ const SidebarDashboard = () => {
                     {userConnections.map((item, idx) => (
                         <div key={idx} style={{ ...ConnectionBoxStyle }}>
                             <span style={{ ...ConnectionListBoxStyle }}>
-                                <div style={{ width: '28px', height: '28px', borderRadius: '40px', backgroundColor: 'var(--second-baseColor2)', cursor: 'pointer' }}></div>
+                                <div style={{ width: '28px', height: '28px', borderRadius: '40px', backgroundColor: 'var(--second-baseColor2)', cursor: 'pointer' }}>
+                                    <img src={item.connected_photoProfile} alt="Picture" width={'100%'} style={{ borderRadius: '100%' }} />
+                                </div>
 
                                 <p style={{ fontSize: '14px', fontWeight: '500', lineHeight: '20px', color: onMouseOverConnection.status && onMouseOverConnection.index === idx ? 'var(--baseColorBlack)' : 'var(--second-base-font-color)', cursor: 'pointer' }} onMouseOver={() => setOnMouseOverConnection({ status: true, index: idx })} onMouseLeave={() => setOnMouseOverConnection({ status: false, index: idx })}>{item.connected_username}</p>
 

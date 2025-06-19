@@ -3,7 +3,7 @@ import React, { createContext, useContext, useEffect, useState } from 'react'
 const UserDPContext = createContext()
 const GetUserDPProvider = ({ children }) => {
     // GET SELF DATA
-    const [userDataProfile, setUserDataProfile] = useState([])
+    const [userDataProfile, setUserDataProfile] = useState({})
     useEffect(() => {
         const getUserData = async () => {
             try {
@@ -21,7 +21,7 @@ const GetUserDPProvider = ({ children }) => {
         }
         getUserData()
     }, [])
-    
+
     return (
         <UserDPContext.Provider value={userDataProfile}>
             {children}

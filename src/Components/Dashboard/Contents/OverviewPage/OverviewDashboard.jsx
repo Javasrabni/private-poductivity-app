@@ -35,9 +35,9 @@ const OverviewDashboard = () => {
 
     // Statistic
     const StatisticCard = [
-        { Heading: 'Total Tasks Completed', scoreValue: 1.245, desc: 'This month', Percent: `${'7'}% Compared to previous period` },
-        { Heading: 'Active Projects', scoreValue: 0, desc: 'Currently running', Percent: `${'12'}% Compared to previous period` },
-        { Heading: 'Team Productivity Score', scoreValue: 0, desc: 'Last 7 days', },
+        { Heading: 'Total Tasks Completed', scoreValue: 59, desc: 'This month', Percent: `${'7'}% Compared to previous period` },
+        { Heading: 'Active Projects', scoreValue: 2, desc: 'Currently running', Percent: `${'12'}% Compared to previous period` },
+        { Heading: 'Team Productivity Score', scoreValue: 90.4, desc: 'Last 7 days', },
         { Heading: 'Upcoming Deadlines', scoreValue: 0, desc: 'Next 3 days', Percent: `${'2'}% Compared to previous period` },
     ]
 

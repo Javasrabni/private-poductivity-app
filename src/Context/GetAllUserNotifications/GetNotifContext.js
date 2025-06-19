@@ -13,6 +13,7 @@ const GetNotifProvider = ({ children }) => {
                 const data = await response.json()
                 if (response.ok) {
                     setGetUserNotif(data)
+                    console.log(data)
                 }
             } catch (error) {
                 console.error(error)

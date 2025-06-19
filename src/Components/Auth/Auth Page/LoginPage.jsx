@@ -15,7 +15,7 @@ const LoginPage = () => {
 
     return (
         <div>
-            <p>lu blom login tot</p>
+            <p>Login dulu</p>
             <Link to={'http://localhost:8003/auth/google'}>DISINI</Link>
         </div>
     )
