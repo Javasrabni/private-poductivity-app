@@ -93,8 +93,6 @@ const Navbar = () => {
         backgroundColor: '#fff',
     }
 
-
-
     // Filtering user data
     const [suggestion, setSuggestion] = useState([])
     const [searchUservalue, setSearchUserValue] = useState('')
@@ -113,9 +111,11 @@ const Navbar = () => {
         user_id: null,
         username: null,
         email: null,
-        photoProfile: null
+        photoProfile: null,
+        createdAt: null,
+        connectedByCount: 0
     })
-    function HandleClickedUserData(user_id, username, email, photoProfile) {
+    function HandleClickedUserData(user_id, username, email, photoProfile, createdAt, connectedByCount) {
         if (ProfilePanelTab.current) {
             ProfilePanelTab.current.focus({ preventScroll: true })
         }
@@ -123,7 +123,9 @@ const Navbar = () => {
             user_id: user_id,
             username: username,
             email: email,
-            photoProfile: photoProfile
+            photoProfile: photoProfile,
+            createdAt: createdAt,
+            connectedByCount: connectedByCount
         })
     }
 
@@ -195,7 +197,6 @@ const Navbar = () => {
         updateUnReadNotif()
     }
 
-
     return (
         <>
             <div style={{ ...NavbarStyle }}>
@@ -227,7 +228,7 @@ const Navbar = () => {
                 {suggestion.map((item, idx) => (
                     <div key={idx}>
                         <ul style={{ listStyle: "none" }}>
-                            <li style={{ backgroundColor: listHovered === idx ? 'var(--second-baseColor)' : '#fff', width: '100%', height: '100%', padding: '12px', cursor: 'pointer', borderRadius: '8px' }} onMouseOver={() => setListHovered(idx)} onMouseLeave={() => setListHovered(null)} onClick={() => HandleClickedUserData(item.user_id, item.username, item.email, item.pictures)}>
+                            <li style={{ backgroundColor: listHovered === idx ? 'var(--second-baseColor)' : '#fff', width: '100%', height: '100%', padding: '12px', cursor: 'pointer', borderRadius: '8px' }} onMouseOver={() => setListHovered(idx)} onMouseLeave={() => setListHovered(null)} onClick={() => HandleClickedUserData(item.user_id, item.username, item.email, item.pictures, item.createdAt, item.connectedByCount)}>
                                 <span style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
                                     {/* Photo profile */}
                                     <div style={{ width: '32px', height: '32px', backgroundColor: 'var(--blue-accent)', borderRadius: '20px' }}>
@@ -248,7 +249,7 @@ const Navbar = () => {
             {/* POPUP PROFILE */}
             <div style={{ ...OnClickProfileContainer }
             } tabIndex={0} onFocus={() => setOnClickProfile(true)} onBlur={() => setOnClickProfile(false)} ref={ProfilePanelTab} >
-                <ViewUserProfilePanel userId={getUserDataClick.user_id} username={getUserDataClick.username} email={getUserDataClick.email} photoProfile={getUserDataClick.photoProfile} />
+                <ViewUserProfilePanel userId={getUserDataClick.user_id} username={getUserDataClick.username} email={getUserDataClick.email} photoProfile={getUserDataClick.photoProfile} createdAt={getUserDataClick.createdAt} connectedByCount={getUserDataClick.connectedByCount} />
             </div >
 
             {/* POPUP NOTIFICATION */}

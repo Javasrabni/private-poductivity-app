@@ -4,9 +4,10 @@ import { ReactComponent as MailIcon } from '../../../Assets/Icon/mail.svg'
 
 // Context
 import { useGetUserConnections } from '../../../Context/GetUserConnections/GetUserConnectionsContext'
+import dayjs from 'dayjs'
 // import { useGetUserDP } from '../../../Context/UserProfileData/getUserProfileData'
 
-const ViewUserProfilePanel = ({ userId, username, email, photoProfile }) => {
+const ViewUserProfilePanel = ({ userId, username, email, photoProfile, createdAt, connectedByCount }) => {
     // User data
     // const GetAllUserData = useGetAllUserData()
     // const userConnections = useGetUserConnections()
@@ -43,7 +44,7 @@ const ViewUserProfilePanel = ({ userId, username, email, photoProfile }) => {
         color: 'var(--second-base-font-color)'
     }
     const messageButtonStyle = {
-        marginTop: '32px',
+        marginTop: '18px',
         display: 'flex',
         alignItems: 'center',
         border: '1px solid var(--border)',
@@ -59,6 +60,17 @@ const ViewUserProfilePanel = ({ userId, username, email, photoProfile }) => {
         fontWeight: 500,
         padding: '12px',
 
+    }
+
+    const userBio = {
+        padding: '18px 0px 0px 0px',
+        fontSize: '14px',
+        color: 'var(--second-base-font-color)',
+        width: '100%',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        gap: '16px'
     }
 
     const [userConnected, setUserConnected] = useState(false)
@@ -84,6 +96,11 @@ const ViewUserProfilePanel = ({ userId, username, email, photoProfile }) => {
                 <h1 style={{ ...usernameStyle }}>{username}</h1>
                 <p style={{ ...emailStyle }}>{email}</p>
                 {/* <p>{userId}</p> */}
+
+                <div style={{ ...userBio }}>
+                    <p>Joined at {dayjs(createdAt).format('DD MMMM YYYY')}</p>
+                    <p><b>{connectedByCount}</b> Connections</p>
+                </div>
 
                 {/* Button */}
                 <div style={{ display: 'flex', gap: '16px', width: '100%' }}>
