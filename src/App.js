@@ -11,6 +11,7 @@ import NotFoundPage from './Components/NotFoundPage/NotFoundPage';
 import GetUserDPProvider from './Context/UserProfileData/getUserProfileData';
 import GetAllUserDataProvider from './Context/GetAllUserData/getAllUserData';
 import GetUserConnectionsProvider from './Context/GetUserConnections/GetUserConnectionsContext';
+import GetNotifProvider from './Context/GetAllUserNotifications/GetNotifContext';
 
 function App() {
   return (
@@ -18,19 +19,21 @@ function App() {
       <GetUserDPProvider>
         <GetUserConnectionsProvider>
           <GetAllUserDataProvider>
-            <Routes>
-              <Route index path='/' element={<Main />} />
-              <Route path='/login' element={<LoginPage />} />
-              <Route path='*' element={<NotFoundPage />} />
+            <GetNotifProvider>
+              <Routes>
+                <Route index path='/' element={<Main />} />
+                <Route path='/login' element={<LoginPage />} />
+                <Route path='*' element={<NotFoundPage />} />
 
 
-              {/* PROTECTED PATH */}
-              <Route path='/dashboard' element={<AuthWrapper><Dashboard /></AuthWrapper>} />
-              <Route path='/calendar' element={<AuthWrapper><Dashboard /></AuthWrapper>} />
-              <Route path='/teams' element={<AuthWrapper><Dashboard /></AuthWrapper>} />
-              <Route path='/analytics' element={<AuthWrapper><Dashboard /></AuthWrapper>} />
-              <Route path='/messages' element={<AuthWrapper><Dashboard /></AuthWrapper>} />
-            </Routes>
+                {/* PROTECTED PATH */}
+                <Route path='/dashboard' element={<AuthWrapper><Dashboard /></AuthWrapper>} />
+                <Route path='/calendar' element={<AuthWrapper><Dashboard /></AuthWrapper>} />
+                <Route path='/teams' element={<AuthWrapper><Dashboard /></AuthWrapper>} />
+                <Route path='/analytics' element={<AuthWrapper><Dashboard /></AuthWrapper>} />
+                <Route path='/messages' element={<AuthWrapper><Dashboard /></AuthWrapper>} />
+              </Routes>
+            </GetNotifProvider>
           </GetAllUserDataProvider>
         </GetUserConnectionsProvider>
       </GetUserDPProvider>

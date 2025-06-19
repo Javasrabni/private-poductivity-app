@@ -104,7 +104,7 @@ const OverviewDashboard = () => {
 
             <div style={{ ...StatisticCardContainer }}>
                 {StatisticCard.map((itm, idx) => (
-                    <div style={{ ...StatisticCardBoxStyle }}>
+                    <div key={idx} style={{ ...StatisticCardBoxStyle }}>
                         <p style={{ ...HeadingStyle }}>{itm.Heading}</p>
                         <h1 style={{ ...scoreValueStyle }}>{itm.scoreValue}</h1>
                         <p style={{ ...descStyle }}>{itm.desc}</p>

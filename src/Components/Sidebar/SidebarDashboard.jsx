@@ -9,8 +9,7 @@ const SidebarDashboard = () => {
     const activeButton = location.pathname
 
     // Get user data
-    const userConnections = useGetUserConnections()
-    const mapUserConnection = userConnections.userConnections
+    const { userConnections } = useGetUserConnections()
 
     // Button style
     const SidebarStyle = {
@@ -59,6 +58,29 @@ const SidebarDashboard = () => {
 
     const ChatIcon = <svg className="w-6 h-6" width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M20 5C20 4.73478 19.8946 4.48051 19.707 4.29297C19.5195 4.10543 19.2652 4 19 4H5C4.73478 4 4.48051 4.10543 4.29297 4.29297C4.10543 4.48051 4 4.73478 4 5V18.5859L6.29297 16.293L6.36621 16.2266C6.54417 16.0807 6.76791 16 7 16H19C19.2652 16 19.5195 15.8946 19.707 15.707C19.8946 15.5195 20 15.2652 20 15V5ZM22 15C22 15.7957 21.6837 16.5585 21.1211 17.1211C20.5585 17.6837 19.7957 18 19 18H7.41406L3.70703 21.707C3.42103 21.993 2.99086 22.0786 2.61719 21.9238C2.24359 21.769 2 21.4044 2 21V5C2 4.20435 2.3163 3.44152 2.87891 2.87891C3.44152 2.3163 4.20435 2 5 2H19C19.7956 2 20.5585 2.3163 21.1211 2.87891C21.6837 3.44152 22 4.20435 22 5V15Z" fill={activeButton === '/messages' ? '#fff' : 'var(--second-base-font-color)'} style={{ fillOpacity: 1 }} /></svg>
 
+    const dotsSettingIcon = <svg className="w-6 h-6" fill="var(--second-base-font-color)" id="Flat" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
+        <path d="M140,128a12,12,0,1,1-12-12A12,12,0,0,1,140,128ZM128,72a12,12,0,1,0-12-12A12,12,0,0,0,128,72Zm0,112a12,12,0,1,0,12,12A12,12,0,0,0,128,184Z" />
+    </svg>
+
+    const [onMouseOverConnection, setOnMouseOverConnection] = useState({
+        status: false,
+        index: null
+    })
+    const ConnectionBoxStyle = {
+        display: 'flex',
+        flexDirection: 'column',
+        // gap: '12px',
+        // marginTop: '8px'
+    }
+    const ConnectionListBoxStyle = {
+        position: 'relative',
+        padding: '8px 0px',
+        display: 'flex',
+        flexDirection: 'row',
+        gap: '12px',
+        alignItems: 'center'
+    }
+
     // Button list
     const Button = [
         { label: "Dashboard", path: "/dashboard", icon: HomeIcon },
@@ -72,7 +94,7 @@ const SidebarDashboard = () => {
         <div style={{ ...SidebarStyle }}>
             <div style={{ width: "100%", gap: "0px", display: "flex", flexDirection: "column" }}>
                 {Button.map(({ label, path, icon }) => (
-                    <button key={path} style={{ ...ButtonStyle, ...(activeButton === path ? ActiveButton : PassiveButton) }} onClick={() => navigate(path)}>
+                    <button key={path} style={{ ...ButtonStyle, ...(activeButton === path ? ActiveButton : PassiveButton) }} onClick={() => setTimeout(() => { navigate(path) }, 50)}>
                         <span style={{ display: 'flex', flexDirection: "row", gap: '12px', alignItems: "center" }}>
                             {icon}
                             {label}
@@ -80,16 +102,27 @@ const SidebarDashboard = () => {
                     </button>
                 ))}
 
-                <div>
-                    <p>My Connections</p>
-                    {mapUserConnection.length > 1 && mapUserConnection.map((item, idx) => (
-                        <div key={idx}>
-                            <p >{item.connected_username}</p>
+                <div style={{ marginTop: '12px', paddingLeft: '12px' }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderTop: '0px solid var(--border)', paddingTop: '16px', paddingBottom: '4px' }}>
+                        <h1 style={{ fontSize: '14px', fontFamily: 'Archivo', color: '#242524FF' }}>My Connections</h1>
+                        {/* <p style={{fontSize: '14px', color: 'var(--second-base-font-color)'}}>{mapUserConnection.length}</p> */}
+                    </div>
+                    {userConnections.map((item, idx) => (
+                        <div key={idx} style={{ ...ConnectionBoxStyle }}>
+                            <span style={{ ...ConnectionListBoxStyle }}>
+                                <div style={{ width: '28px', height: '28px', borderRadius: '40px', backgroundColor: 'var(--second-baseColor2)', cursor: 'pointer' }}></div>
+
+                                <p style={{ fontSize: '14px', fontWeight: '500', lineHeight: '20px', color: onMouseOverConnection.status && onMouseOverConnection.index === idx ? 'var(--baseColorBlack)' : 'var(--second-base-font-color)', cursor: 'pointer' }} onMouseOver={() => setOnMouseOverConnection({ status: true, index: idx })} onMouseLeave={() => setOnMouseOverConnection({ status: false, index: idx })}>{item.connected_username}</p>
+
+                                <span style={{ width: '20px', rotate: '90deg', position: 'absolute', right: '0px', cursor: 'pointer' }}>
+                                    {dotsSettingIcon}
+                                </span>
+                            </span>
                         </div>
                     ))}
                 </div>
             </div>
-        </div>
+        </div >
     )
 }
 

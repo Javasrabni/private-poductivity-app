@@ -4,12 +4,12 @@ import { useNavigate } from 'react-router-dom'
 // User data
 import { useGetAllUserData } from '../../Context/GetAllUserData/getAllUserData'
 import ViewUserProfilePanel from './ViewUserProfile/ViewUserProfilePanel'
+import Notifications from './Notifications/Notifications'
 
 const Navbar = () => {
     const navigate = useNavigate()
     // Get user data
     const GetAllUserData = useGetAllUserData()
-
     // Style
     const [listHovered, setListHovered] = useState(null)
     const NavbarStyle = {
@@ -70,7 +70,9 @@ const Navbar = () => {
 
         flexDirection: 'column',
         // gap: '16px',
-        fontSize: '14px'
+        fontSize: '14px',
+        borderRadius: '8px',
+        // boxShadow   : '0px 12px 18px rgba(23, 26, 31, 0.06), 0px 0px 12px #171a1f1F',
     }
     // Profile click
     const [onClickProfile, setOnClickProfile] = useState(false)
@@ -135,6 +137,8 @@ const Navbar = () => {
 
     const ProfilePanelTab = useRef()
 
+    // Notification
+    const [onClickNotification, setOnClickNotification] = useState(false)
 
     return (
         <>
@@ -144,7 +148,7 @@ const Navbar = () => {
                     {/* Search user */}
                     <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
                         {/* Notification */}
-                        <div tabIndex={0} style={{ ...NotifContainer }} onMouseOver={() => setNotifMouseOver(true)} onMouseLeave={() => setNotifMouseOver(false)}>
+                        <div tabIndex={0} style={{ ...NotifContainer }} onMouseOver={() => setNotifMouseOver(true)} onMouseLeave={() => setNotifMouseOver(false)} onClick={() => setTimeout(() => { setOnClickNotification(prev => !prev) }, 50)}>
                             <div style={{ width: '24px' }}>{NotifIcon}</div>
                         </div>
 
@@ -163,7 +167,7 @@ const Navbar = () => {
                 {suggestion.map((item, idx) => (
                     <div key={idx}>
                         <ul style={{ listStyle: "none" }}>
-                            <li style={{ backgroundColor: listHovered === idx ? 'var(--second-baseColor)' : '#fff', width: '100%', height: '100%', padding: '12px', cursor: 'pointer' }} onMouseOver={() => setListHovered(idx)} onMouseLeave={() => setListHovered(null)} onClick={() => HandleClickedUserData(item.user_id, item.username, item.email)}>
+                            <li style={{ backgroundColor: listHovered === idx ? 'var(--second-baseColor)' : '#fff', width: '100%', height: '100%', padding: '12px', cursor: 'pointer', borderRadius: '8px' }} onMouseOver={() => setListHovered(idx)} onMouseLeave={() => setListHovered(null)} onClick={() => HandleClickedUserData(item.user_id, item.username, item.email)}>
                                 <span style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
                                     {/* Photo profile */}
                                     <div style={{ width: '32px', height: '32px', backgroundColor: 'var(--blue-accent)', borderRadius: '20px' }}></div>
@@ -177,13 +181,16 @@ const Navbar = () => {
                         </ul>
                     </div>
                 ))}
-            </div>
+            </div >
 
             {/* POPUP PROFILE */}
-            <div style={{ ...OnClickProfileContainer }} tabIndex={0} onFocus={() => setOnClickProfile(true)} onBlur={() => setOnClickProfile(false)} ref={ProfilePanelTab}>
+            <div style={{ ...OnClickProfileContainer }
+            } tabIndex={0} onFocus={() => setOnClickProfile(true)} onBlur={() => setOnClickProfile(false)} ref={ProfilePanelTab} >
                 <ViewUserProfilePanel userId={getUserDataClick.user_id} username={getUserDataClick.username} email={getUserDataClick.email} photoProfile={getUserDataClick.photoProfile} />
-            </div>
+            </div >
 
+            {/* POPUP NOTIFICATION */}
+            <Notifications onClickNotifBtn={onClickNotification} />
         </>
     )
 }
