@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 
 import { useGetUserNotif } from '../../../Context/GetAllUserNotifications/GetNotifContext'
 // import { useGetUserDP } from '../../../Context/UserProfileData/getUserProfileData'
@@ -10,21 +10,35 @@ import 'dayjs/locale/en'
 dayjs.extend(relativeTime)
 dayjs.locale('en')
 
-const Notifications = ({ onClickNotifBtn }) => {
+const Notifications = () => {
     // Get user data
     // const { pictures } = useGetUserDP()
 
     // Get user notif
-    const { getUserNotif } = useGetUserNotif()
+    const { getUserNotif, statusOpenNotifContainer, setStatusOpenNotifContainer } = useGetUserNotif()
+
 
     // Track new Notif for change it style
     // If notif was read => make text into thin (default bold)
+
+    const focusNotifContainerRef = useRef()
+
+    useEffect(() => {
+        if (focusNotifContainerRef.current) {
+            if (statusOpenNotifContainer) {
+                focusNotifContainerRef.current.focus({ preventScroll: true })
+                setStatusOpenNotifContainer(true)
+            } else {
+                setStatusOpenNotifContainer(false)
+            }
+        }
+    }, [statusOpenNotifContainer])
 
     const NotifContainer = {
         position: 'absolute',
         top: '56px',
         right: '0px',
-        transform: onClickNotifBtn ? 'translateX(0)' : 'translateX(100%)',
+        transform: focusNotifContainerRef ? 'translateX(0)' : 'translateX(100%)',
         border: '1px solid var(--border)',
         transition: 'transform 0.3s ease',
         // width: '384px',
@@ -49,10 +63,10 @@ const Notifications = ({ onClickNotifBtn }) => {
     }
 
     return (
-        <div style={{ ...NotifContainer }}>
+        <div style={{ ...NotifContainer }} ref={focusNotifContainerRef} tabIndex={0} onFocus={() => setStatusOpenNotifContainer(true)} onBlur={() => setStatusOpenNotifContainer(false)}>
             <p style={{ fontWeight: 600, fontFamily: 'Archivo', paddingBottom: '24px', fontSize: '14px', padding: '24px 24px 12px 24px' }}>Notifications</p>
             {getUserNotif.length > 0 ? (
-                <div style={{display: 'flex', flexDirection: 'column-reverse'}}>
+                <div style={{ display: 'flex', flexDirection: 'column-reverse' }}>
                     {getUserNotif.map((item, idx) => (
                         <div key={idx} style={{ display: 'flex', gap: '8px', backgroundColor: 'var(--baseColor)', transition: 'background-color 0.3s ease', }}>
                             <div style={{ display: 'flex', alignItems: 'center', gap: '12px', padding: '12px 24px' }}>

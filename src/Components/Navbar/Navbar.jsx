@@ -15,6 +15,9 @@ const Navbar = () => {
     const GetAllUserData = useGetAllUserData()
     const userDatas = useGetUserDP()
 
+    const { statusOpenNotifContainer, setStatusOpenNotifContainer } = useGetUserNotif()
+
+
     // Style
     const [listHovered, setListHovered] = useState(null)
     const NavbarStyle = {
@@ -115,6 +118,9 @@ const Navbar = () => {
         createdAt: null,
         connectedByCount: 0
     })
+
+    const [lengthUserConnections, setLengthUserConnections] = useState(getUserDataClick.connectedByCount)
+
     function HandleClickedUserData(user_id, username, email, photoProfile, createdAt, connectedByCount) {
         if (ProfilePanelTab.current) {
             ProfilePanelTab.current.focus({ preventScroll: true })
@@ -151,7 +157,6 @@ const Navbar = () => {
         backgroundColor: 'tomato'
     }
 
-    const [onClickNotification, setOnClickNotification] = useState(false)
     const { getUserNotif } = useGetUserNotif()
     const countNotif = getUserNotif.filter(n => !n.is_read).length
     const [isRead, setIsRead] = useState(false)
@@ -170,7 +175,7 @@ const Navbar = () => {
         padding: '6px 4px 4px 8px',
         borderRadius: '6px',
         cursor: 'pointer',
-        backgroundColor: NotifMouseOver || onClickNotification ? 'var(--second-baseColor)' : '#fff'
+        backgroundColor: NotifMouseOver || statusOpenNotifContainer ? 'var(--second-baseColor)' : '#fff'
     }
 
     // Update is_read into db
@@ -189,7 +194,7 @@ const Navbar = () => {
 
     function HandleClickNotif() {
         setTimeout(() => {
-            setOnClickNotification(prev => !prev)
+            setStatusOpenNotifContainer(prev => !prev)
             setIsRead(false)
         }, 50)
 
@@ -253,7 +258,7 @@ const Navbar = () => {
             </div >
 
             {/* POPUP NOTIFICATION */}
-            <Notifications onClickNotifBtn={onClickNotification} />
+            <Notifications />
         </>
     )
 }

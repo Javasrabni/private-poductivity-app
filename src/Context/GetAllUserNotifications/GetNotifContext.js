@@ -21,8 +21,11 @@ const GetNotifProvider = ({ children }) => {
         };
         GetReceiveNotif();
     }, [])
+
+    const [statusOpenNotifContainer, setStatusOpenNotifContainer] = useState(false)
+
     return (
-        <GetNotifContext.Provider value={{ getUserNotif }}>
+        <GetNotifContext.Provider value={{ getUserNotif, statusOpenNotifContainer, setStatusOpenNotifContainer }}>
             {children}
         </GetNotifContext.Provider>
     )
